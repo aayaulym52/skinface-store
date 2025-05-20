@@ -10,7 +10,6 @@
     <div class="max-w-7xl mx-auto px-2 py-6 font-inter mt-4">
       <h1 class="text-5xl font-bold mb-8">Корзина</h1>
 
-      <!-- Если товаров в корзине нет -->
       <div v-if="shop.cartItems.length === 0" class="text-center mt-20">
         <h2 class="text-3xl font-semibold mb-4">Товаров в корзине нет</h2>
         <p class="text-gray-600 mb-6">Добавьте товары в корзину для оформления заказа.</p>
