@@ -14,25 +14,41 @@
 
     <div class="grid md:grid-cols-2 gap-8 items-start">
       <div>
-        <div>
-          <h2 class="text-3xl font-bold">Авторизация</h2>
-
-          <button
-            v-if="!isLoggedIn"
-            @click="showAuthModal = true"
-            class="bg-pink-500 hover:bg-pink-600 text-white w-full mt-4 py-2 rounded-lg transition mb-4"
-          >
-            Войти или Зарегистрироваться
-          </button>
-
-          <div v-else class="mb-4 text-lg font-semibold text-slate-500">
-            Вошли как: {{ user.currentUser.email }}
-          </div>
+        <!-- Авторизация -->
+        <h2 class="text-3xl font-bold mb-4">Авторизация</h2>
+        <button
+          v-if="!isLoggedIn"
+          @click="showAuthModal = true"
+          class="bg-pink-500 hover:bg-pink-600 text-white w-full py-2 rounded-lg transition mb-4"
+        >
+          Войти или Зарегистрироваться
+        </button>
+        <div v-else class="mb-4 text-lg font-semibold text-slate-500">
+          Вошли как: {{ user.currentUser.email }}
         </div>
 
-        <FormBlock :form="form" :readonly="isLoggedIn" @submit="submitOrder">
-          <DeliveryOptions v-model="form.delivery" />
-        </FormBlock>
+        <!-- Контактные данные -->
+        <ContactForm
+          v-model="form"
+          :readonly="isLoggedIn"
+          :showButton="false"
+        />
+        <AddressForm
+          v-model:form="form.address"
+          :readonly="isLoggedIn"
+          :showButton="false"
+        />
+
+        <!-- Способ доставки -->
+        <DeliveryOptions v-model="form.delivery" />
+
+        <!-- Кнопка отправки -->
+        <button
+          @click="submitOrder"
+          class="bg-green-500 hover:bg-green-600 text-white w-full mt-4 py-3 rounded-lg transition"
+        >
+          Оформить заказ
+        </button>
       </div>
 
       <CartSummary :items="shop.cartItems" :total="totalSum" />
@@ -47,8 +63,9 @@ import { useUserStore } from "../stores/user";
 import { useRouter } from "vue-router";
 
 import AuthModal from "../components/AuthModal.vue";
-import FormBlock from "../components/FormBlock.vue";
 import CartSummary from "../components/CartSummary.vue";
+import ContactForm from "../components/ContactForm.vue";
+import AddressForm from "../components/AddressForm.vue";
 import DeliveryOptions from "../components/DeliveryOptions.vue";
 
 const shop = useShopStore();
@@ -58,6 +75,8 @@ const router = useRouter();
 const isLoggedIn = computed(() => !!user.currentUser);
 const showAuthModal = ref(false);
 const showLogin = ref(true);
+const showSuccess = ref(false);
+const showError = ref(false);
 
 function toggleForm() {
   showLogin.value = !showLogin.value;
@@ -67,7 +86,7 @@ function handleClose() {
 }
 
 const form = reactive({
-  name: "",
+  fullName: "",
   phone: "",
   email: "",
   address: {
@@ -79,25 +98,26 @@ const form = reactive({
   delivery: "",
 });
 
-const showSuccess = ref(false);
-const showError = ref(false);
-
 const totalSum = computed(() =>
   shop.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
 );
 
 const successClass =
-  "fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity duration-300";
+  "fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
 const errorClass =
-  "fixed top-6 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity duration-300";
+  "fixed top-6 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
 
 async function submitOrder() {
-  const requiredFields = ["name", "phone", "email", "delivery"];
+  console.log("Данные формы перед проверкой:", JSON.stringify(form));
+
+  const requiredFields = ["fullName", "phone", "email", "delivery"];
   const requiredAddressFields = ["city", "street", "house", "apartment"];
 
   const hasEmptyFields =
-    requiredFields.some((field) => !form[field]) ||
-    requiredAddressFields.some((field) => !form.address[field]);
+    requiredFields.some((field) => !form[field] || !form[field].trim()) ||
+    requiredAddressFields.some(
+      (field) => !form.address[field] || !form.address[field].trim()
+    );
 
   if (hasEmptyFields) {
     showError.value = true;
@@ -108,7 +128,7 @@ async function submitOrder() {
   const userId = user.currentUser?.id || null;
 
   const order = {
-    name: form.name,
+    name: form.fullName,
     phone: form.phone,
     email: form.email,
     address: form.address,
@@ -140,30 +160,20 @@ async function submitOrder() {
 }
 
 watch(
-  () => user.currentUser,
-  (newUser) => {
-    if (newUser) {
-      form.name = newUser.fullName || "";
-      form.phone = newUser.phone || "";
-      form.email = newUser.email || "";
-      form.address = newUser.address
-        ? { ...newUser.address }
-        : {
-            city: "",
-            street: "",
-            house: "",
-            apartment: "",
-          };
-    } else {
-      form.name = "";
-      form.phone = "";
-      form.email = "";
-      form.address = {
-        city: "",
-        street: "",
-        house: "",
-        apartment: "",
-      };
+  isLoggedIn,
+  (loggedIn) => {
+    if (loggedIn && user.currentUser) {
+      form.fullName = user.currentUser.fullName || "";
+      form.email = user.currentUser.email || "";
+      form.phone = user.currentUser.phone || "";
+      if (user.currentUser.address) {
+        Object.assign(form.address, {
+          city: user.currentUser.address.city || "",
+          street: user.currentUser.address.street || "",
+          house: user.currentUser.address.house || "",
+          apartment: user.currentUser.address.apartment || "",
+        });
+      }
     }
   },
   { immediate: true }

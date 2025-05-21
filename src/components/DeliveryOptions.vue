@@ -7,29 +7,33 @@
       :key="option.value"
       :class="[
         radioLabelClass,
-        { 'border-pink-400 bg-pink-50': modelValue === option.value },
+        { 'border-pink-400 bg-pink-50': selected === option.value },
       ]"
     >
       <input
         type="radio"
         :value="option.value"
-        :checked="modelValue === option.value"
-        @change="$emit('update:modelValue', option.value)"
-        class="appearance-none accent-pink-400"
+        v-model="selected"
+        class="appearance-none w-4 h-4 rounded-full border-2 border-pink-400 checked:bg-pink-400"
       />
+
       {{ option.label }}
     </label>
   </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
 
 const props = defineProps({
   modelValue: String,
 });
-
 const emits = defineEmits(["update:modelValue"]);
+
+const selected = computed({
+  get: () => props.modelValue,
+  set: (val) => emits("update:modelValue", val),
+});
 
 const options = [
   { value: "taxi", label: "Яндекс или Индрайвер (по городу)" },

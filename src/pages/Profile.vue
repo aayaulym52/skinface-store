@@ -10,132 +10,29 @@
 
       <div class="flex gap-10">
         <!-- Левое меню -->
-        <nav class="w-1/4 border-r pr-6">
-          <ul class="flex flex-col gap-4 text-lg">
-            <li
-              @click="selectedTab = 'orders'"
-              :class="{
-                'text-pink-500 font-semibold cursor-pointer':
-                  selectedTab === 'orders',
-                'cursor-pointer hover:text-pink-400': selectedTab !== 'orders',
-              }"
-            >
-              История заказов
-            </li>
-            <li
-              @click="selectedTab = 'address'"
-              :class="{
-                'text-pink-500 font-semibold cursor-pointer':
-                  selectedTab === 'address',
-                'cursor-pointer hover:text-pink-400': selectedTab !== 'address',
-              }"
-            >
-              Адрес доставки
-            </li>
-            <li
-              @click="selectedTab = 'contacts'"
-              :class="{
-                'text-pink-500 font-semibold cursor-pointer':
-                  selectedTab === 'contacts',
-                'cursor-pointer hover:text-pink-400':
-                  selectedTab !== 'contacts',
-              }"
-            >
-              Контактные данные
-            </li>
-            <li
-              @click="logout"
-              class="cursor-pointer text-red-500 hover:text-red-600 font-semibold mt-10"
-            >
-              Выйти
-            </li>
-          </ul>
-        </nav>
+        <ProfileTabs
+          :selectedTab="selectedTab"
+          @update:selectedTab="selectedTab = $event"
+          @logout="logout"
+        />
 
-        <!-- Правая часть - контент -->
+        <!-- Правая часть -->
         <section class="flex-1">
-          <!-- Заказы -->
-          <div v-if="selectedTab === 'orders'">
-            <h3 class="text-2xl font-semibold mb-6">Мои заказы</h3>
-            <div
-              v-if="orders.length"
-              class="flex flex-col gap-4 max-h-[400px] overflow-y-auto"
-            >
-              <div
-                v-for="order in orders"
-                :key="order.id"
-                class="p-4 border rounded shadow-sm hover:shadow-md transition cursor-pointer"
-              >
-                <div class="flex justify-between mb-2">
-                  <span class="font-semibold">Заказ №{{ order.id }}</span>
-                  <span class="text-gray-600 text-sm">{{
-                    formatDate(order.createdAt)
-                  }}</span>
-                </div>
-                <div class="mb-2">
-                  <ul class="list-disc list-inside text-gray-700">
-                    <li
-                      v-for="item in order.items"
-                      :key="item.id"
-                      class="flex items-center gap-3"
-                    >
-                      <img
-                        :src="item.image"
-                        alt="Изображение товара"
-                        class="w-12 h-12 object-cover rounded"
-                      />
-                      <span>{{ item.name }} — {{ item.quantity }} шт.</span>
-                    </li>
-                  </ul>
-                </div>
-                <div class="font-bold text-pink-600">
-                  Итого: {{ order.total }} ₸
-                </div>
-              </div>
-            </div>
-            <p v-else>У вас пока нет заказов.</p>
-          </div>
+          <OrdersList v-if="selectedTab === 'orders'" :orders="orders" />
 
-          <!-- Адрес доставки -->
-          <div v-if="selectedTab === 'address'">
-            <AddressForm v-model:form="address" @save="handleSaveAddress" />
-          </div>
+          <AddressForm
+            v-if="selectedTab === 'address'"
+            v-model:form="address"
+            @save="handleSaveAddress"
+            :showButton="true"
+          />
 
-          <!-- Контактные данные -->
-          <div v-if="selectedTab === 'contacts'">
-            <h3 class="text-2xl font-semibold mb-6">Контактные данные</h3>
-
-            <div class="mb-4">
-              <label class="block text-gray-700 mb-1">ФИО:</label>
-              <input
-                v-model="editedUser.fullName"
-                class="w-full border px-4 py-2 rounded"
-              />
-            </div>
-
-            <div class="mb-4">
-              <label class="block text-gray-700 mb-1">Email:</label>
-              <input
-                v-model="editedUser.email"
-                class="w-full border px-4 py-2 rounded"
-              />
-            </div>
-
-            <div class="mb-4">
-              <label class="block text-gray-700 mb-1">Телефон:</label>
-              <input
-                v-model="editedUser.phone"
-                class="w-full border px-4 py-2 rounded"
-              />
-            </div>
-
-            <button
-              @click="saveChanges"
-              class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition"
-            >
-              Сохранить изменения
-            </button>
-          </div>
+          <ContactForm
+            v-if="selectedTab === 'contacts'"
+            v-model="editedUser"
+            @save="saveChanges"
+            :showButton="true"
+          />
         </section>
       </div>
     </div>
@@ -146,6 +43,9 @@
 import { ref, reactive, computed, onMounted } from "vue";
 import AuthModal from "../components/AuthModal.vue";
 import AddressForm from "../components/AddressForm.vue";
+import OrdersList from "../components/OrdersList.vue";
+import ContactForm from "../components/ContactForm.vue";
+import ProfileTabs from "../components/ProfileTabs.vue";
 import { useUserStore } from "../stores/user";
 
 const userStore = useUserStore();
@@ -153,7 +53,6 @@ const userStore = useUserStore();
 const currentUser = computed(
   () => userStore.currentUser || { fullName: "Гость" }
 );
-
 const isLoggedIn = ref(false);
 const showAuthModal = ref(true);
 const selectedTab = ref("orders");
