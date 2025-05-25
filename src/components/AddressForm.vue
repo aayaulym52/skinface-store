@@ -2,19 +2,23 @@
   <div>
     <h2 class="text-2xl font-bold mb-6">Адрес доставки</h2>
 
-    <input v-model="form.city" placeholder="г.Астана" :class="inputClass" />
-    <input v-model="form.street" placeholder="Улица" :class="inputClass" />
+    <input
+      v-model="localForm.city"
+      placeholder="г.Астана"
+      :class="inputClass"
+    />
+    <input v-model="localForm.street" placeholder="Улица" :class="inputClass" />
 
     <div class="flex items-center gap-2">
-      <input v-model="form.house" placeholder="Дом" :class="inputClass" />
+      <input v-model="localForm.house" placeholder="Дом" :class="inputClass" />
       <input
-        v-model="form.apartment"
+        v-model="localForm.apartment"
         placeholder="Квартира"
         :class="inputClass"
       />
     </div>
 
-    <button v-if="showButton" @click="$emit('save')" :class="buttonClass">
+    <button v-if="showButton" @click="submitAddress" :class="buttonClass">
       Сохранить адрес
     </button>
 
@@ -23,20 +27,32 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive, watch, ref } from "vue";
 
 const props = defineProps({
   form: Object,
-  showButton: {
-    type: Boolean,
-    default: true,
-  },
+  showButton: Boolean,
 });
-
 const emit = defineEmits(["update:form", "save"]);
 
-const saveSuccess = ref(false);
+const localForm = reactive({ ...props.form });
 
+watch(
+  () => props.form,
+  (newVal) => {
+    Object.assign(localForm, newVal);
+  }
+);
+
+watch(
+  localForm,
+  (newVal) => {
+    emit("update:form", { ...newVal });
+  },
+  { deep: true }
+);
+
+const saveSuccess = ref(false);
 const submitAddress = () => {
   emit("save");
   saveSuccess.value = true;

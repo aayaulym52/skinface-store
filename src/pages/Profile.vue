@@ -87,29 +87,27 @@ function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString();
 }
 
-async function handleSaveAddress(newAddress) {
-  if (!userStore.currentUser) return;
-
+async function handleSaveAddress() {
   const updatedUser = {
     ...userStore.currentUser,
-    address: newAddress,
+    address: address.value,
   };
 
   await fetch(`https://61491fe95a8721ce.mokky.dev/users/${updatedUser.id}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ address: newAddress }),
+    body: JSON.stringify({ address: address.value }),
   });
 
   userStore.currentUser = updatedUser;
 }
 
 async function saveChanges() {
-  if (!currentUser.value.id) return;
+  if (!userStore.currentUser?.id) return;
 
   try {
     const response = await fetch(
-      `https://61491fe95a8721ce.mokky.dev/users/${currentUser.value.id}`,
+      `https://61491fe95a8721ce.mokky.dev/users/${userStore.currentUser.id}`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

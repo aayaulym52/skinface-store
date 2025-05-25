@@ -14,7 +14,6 @@
 
     <div class="grid md:grid-cols-2 gap-8 items-start">
       <div>
-        <!-- Авторизация -->
         <h2 class="text-3xl font-bold mb-4">Авторизация</h2>
         <button
           v-if="!isLoggedIn"
@@ -27,7 +26,6 @@
           Вошли как: {{ user.currentUser.email }}
         </div>
 
-        <!-- Контактные данные -->
         <ContactForm
           v-model="form"
           :readonly="isLoggedIn"
@@ -39,13 +37,11 @@
           :showButton="false"
         />
 
-        <!-- Способ доставки -->
         <DeliveryOptions v-model="form.delivery" />
 
-        <!-- Кнопка отправки -->
         <button
           @click="submitOrder"
-          class="bg-green-500 hover:bg-green-600 text-white w-full mt-4 py-3 rounded-lg transition"
+          class="bg-pink-500 hover:bg-pink-600 text-white w-full mt-4 py-3 rounded-lg transition"
         >
           Оформить заказ
         </button>

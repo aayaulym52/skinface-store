@@ -11,7 +11,7 @@
       />
     </div>
 
-    <button v-if="showButton" @click="$emit('save')" :class="buttonClass">
+    <button v-if="showButton" @click="onSave" :class="buttonClass">
       Сохранить изменения
     </button>
 
@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { reactive, watch, ref } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   modelValue: Object,
@@ -34,29 +34,18 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue", "save"]);
 
-const model = reactive({ ...props.modelValue });
-
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    Object.assign(model, newVal);
-  }
-);
-
-watch(
-  model,
-  (newVal) => {
-    emit("update:modelValue", newVal);
-  },
-  { deep: true }
-);
+const model = computed({
+  get: () => props.modelValue,
+  set: (val) => emit("update:modelValue", val),
+});
 
 const saveSuccess = ref(false);
 
-watch(
-  () => props.showButton,
-  () => (saveSuccess.value = false)
-);
+const onSave = () => {
+  emit("save");
+  saveSuccess.value = true;
+  setTimeout(() => (saveSuccess.value = false), 2000);
+};
 
 const fields = {
   fullName: { label: "ФИО", type: "text" },
