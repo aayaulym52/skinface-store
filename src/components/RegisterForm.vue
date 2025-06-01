@@ -1,8 +1,8 @@
 <template>
   <AuthModal v-if="showModal" @close="showModal = false" />
 
-  <div class="mt-6 mx-auto max-w-md">
-    <form @submit.prevent="register" class="space-y-4">
+  <div class="mt-4 mx-auto w-full max-w-sm px-3 sm:px-6">
+    <form @submit.prevent="register" class="space-y-3 sm:space-y-4">
       <input v-model="name" type="text" placeholder="ФИО" :class="inputClass" />
       <input
         v-model="phone"
@@ -25,20 +25,21 @@
 
       <button
         type="submit"
-        class="w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-full transition"
+        class="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-full text-sm sm:text-base transition"
       >
         Зарегистрироваться
       </button>
     </form>
 
-    <p class="text-center mt-6">
+    <p class="text-center mt-5 text-xs sm:text-sm">
       У меня есть аккаунт.
-      <button @click="emit('switch')" class="text-blue-500 hover:text-blue-700">
+      <button @click="emit('switch')" class="text-blue-500 hover:text-blue-700 font-medium">
         Войти
       </button>
     </p>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from "vue";
@@ -47,7 +48,7 @@ import { defineEmits } from "vue";
 import AuthModal from "./AuthModal.vue";
 
 const inputClass =
-  "w-full py-4 px-4 rounded-full border border-slate-300 outline-none hover:border-pink-400 transition";
+  "w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-full border border-slate-300 outline-none hover:border-pink-400 text-sm sm:text-base transition";
 
 const name = ref("");
 const email = ref("");

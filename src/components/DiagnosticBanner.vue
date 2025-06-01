@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-[#ffb2d6] w-full h-[600px] relative flex items-center justify-center overflow-hidden mt-10"
+    class="bg-[#ffb2d6] w-full relative flex items-center justify-center overflow-hidden h-[500px] sm:h-[500px] md:h-[600px]"
   >
     <div class="w-full max-w-7xl px-4 mx-auto relative">
       <swiper
@@ -11,37 +11,37 @@
         ref="mySwiper"
       >
         <swiper-slide>
-          <div class="flex items-center justify-center h-[400px]">
+          <div
+            class="flex items-center justify-center h-[220px] sm:h-[320px] md:h-[400px] lg:h-[420px]"
+          >
             <img
               src="/diagnost1.jpg"
               alt="Диагностика 1"
-              width="492"
-              height="320"
-              class="object-contain"
+              class="object-contain max-w-full max-h-full"
             />
           </div>
         </swiper-slide>
 
         <swiper-slide>
-          <div class="flex items-center justify-center h-[400px]">
+          <div
+            class="flex items-center justify-center h-[220px] sm:h-[320px] md:h-[400px] lg:h-[420px]"
+          >
             <img
               src="/diagnost2.jpg"
               alt="Диагностика 2"
-              width="492"
-              height="320"
-              class="object-contain"
+              class="object-contain max-w-full max-h-full"
             />
           </div>
         </swiper-slide>
 
         <swiper-slide>
-          <div class="flex items-center justify-center h-[400px]">
+          <div
+            class="flex items-center justify-center h-[220px] sm:h-[320px] md:h-[400px] lg:h-[420px]"
+          >
             <img
               src="/diagnost3.jpg"
               alt="Диагностика 3"
-              width="492"
-              height="320"
-              class="object-contain"
+              class="object-contain max-w-full max-h-full"
             />
           </div>
         </swiper-slide>
@@ -49,7 +49,7 @@
     </div>
 
     <button
-      class="absolute bottom-8 bg-blue-500 text-white text-lg font-semibold px-8 py-4 rounded-full shadow hover:bg-blue-700 transition"
+      class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-sm sm:text-base md:text-lg font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full shadow-md hover:bg-blue-600 transition duration-300 text-center"
     >
       ЗАПИСАТЬСЯ НА ДИАГНОСТИКУ
     </button>

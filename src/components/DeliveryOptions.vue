@@ -1,5 +1,7 @@
 <template>
-  <label class="block text-3xl font-bold mb-6">Способ доставки</label>
+  <label class="block text-lg sm:text-2xl font-bold mb-6"
+    >Способ доставки</label
+  >
 
   <div class="flex flex-col gap-3">
     <label
@@ -42,5 +44,5 @@ const options = [
 ];
 
 const radioLabelClass =
-  "border rounded-lg px-4 py-3 cursor-pointer hover:border-pink-400 transition flex items-center gap-3";
+  "border rounded-lg px-3 py-2 cursor-pointer hover:border-pink-400 transition flex items-center gap-2 text-sm sm:px-4 sm:py-3 sm:gap-3 sm:text-base";
 </script>

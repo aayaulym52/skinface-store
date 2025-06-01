@@ -1,6 +1,6 @@
 <template>
-  <nav class="w-1/4 border-r pr-6">
-    <ul class="flex flex-col gap-4 text-lg">
+  <nav class="w-1/4 border-r">
+    <ul class="flex flex-col gap-4 text-sm sm:text-lg">
       <li
         v-for="tab in tabs"
         :key="tab.name"

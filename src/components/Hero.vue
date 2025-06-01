@@ -4,34 +4,29 @@
   <div class="w-full font-inter">
     <div class="h-full">
       <header
-        class="w-full min-h-[65vh] sm:min-h-[70vh] flex mt-4 lg:mt-8 overflow-hidden items-center justify-start relative"
+        class="relative w-full min-h-[40vh] sm:min-h-[65vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden mt-4 lg:mt-8"
       >
         <img
-          src="/bg3.webp"
+          src="/bg.jpg"
           alt=""
-          class="absolute inset-0 h-full w-full object-cover object-center"
+          class="absolute inset-0 w-full h-full object-cover object-center"
         />
+        <div class="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
+
         <div
-          class="absolute h-full w-full z-1 inset-0 bg-black bg-opacity-20"
-        ></div>
-        <div
-          class="ml-8 bg-transparent flex flex-col sm:max-w-lg md:max-w-xl lg:max-w-3xl relative z-2 gap-2 md:gap-4 lg:gap-6 items-start"
+          class="relative z-20 px-4 sm:px-8 flex flex-col items-center justify-center text-center gap-4 w-full max-w-[1000px]"
         >
-          <h1
-            class="text-2xl text-center md:text-4xl lg:text-6xl text-white font-medium mt-1"
-          >
-            Открой для себя новую коллекцию ухода
+          <h1 class="text-2xl sm:text-4xl lg:text-5xl text-white font-medium">
+            Открой для себя новую <br />коллекцию ухода
           </h1>
 
-          <div class="w-full flex justify-center">
-            <router-link to="/shop">
-              <button
-                class="inline-flex items-center justify-center gap-2 text-md font-medium text-gray-800 border bg-white rounded-md h-11 px-8 hover:bg-gray-200 active:bg-green-200 transition-colors"
-              >
-                Каталог
-              </button>
-            </router-link>
-          </div>
+          <router-link to="/shop">
+            <button
+              class="text-md font-medium text-gray-800 border bg-white rounded-md h-11 px-8 hover:bg-gray-200 active:bg-green-200 transition-colors"
+            >
+              Каталог
+            </button>
+          </router-link>
         </div>
       </header>
     </div>

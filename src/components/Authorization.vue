@@ -1,6 +1,6 @@
 <template>
-  <div class="mt-6 mx-auto max-w-md">
-    <form @submit.prevent="login" class="space-y-4">
+  <div class="mt-4 mx-auto w-full max-w-sm px-3 sm:px-6">
+    <form @submit.prevent="login" class="space-y-3 sm:space-y-4">
       <input
         v-model="email"
         type="email"
@@ -16,17 +16,17 @@
 
       <button
         type="submit"
-        class="w-full bg-pink-500 hover:bg-pink-600 text-white py-4 rounded-full transition"
+        class="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-full text-sm sm:text-base transition"
       >
         Войти
       </button>
     </form>
 
-    <p class="text-center mt-6">
+    <p class="text-center mt-5 text-xs sm:text-sm">
       Нет аккаунта?
       <button
         @click="emit('switch')"
-        class="text-blue-500 hover:text-blue-700 ml-1"
+        class="text-blue-500 hover:text-blue-700 font-medium ml-1"
       >
         Зарегистрируйтесь
       </button>
@@ -47,7 +47,7 @@ const router = useRouter();
 const emit = defineEmits(["switch", "success"]);
 
 const inputClass =
-  "w-full py-4 px-4 rounded-full border border-slate-300 outline-none hover:border-pink-400 transition";
+  "w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-full border border-slate-300 outline-none hover:border-pink-400 text-sm sm:text-base transition";
 
 const login = async () => {
   try {

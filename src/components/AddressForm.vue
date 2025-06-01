@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-2xl font-bold mb-6">Адрес доставки</h2>
+    <h2 class="text-lg sm:text-2xl font-bold mb-6">Адрес доставки</h2>
 
     <input
       v-model="localForm.city"
@@ -19,7 +19,7 @@
     </div>
 
     <button v-if="showButton" @click="submitAddress" :class="buttonClass">
-      Сохранить адрес
+      Сохранить
     </button>
 
     <p v-if="saveSuccess" class="text-green-500 mt-2">Адрес сохранён</p>
@@ -59,7 +59,9 @@ const submitAddress = () => {
   setTimeout(() => (saveSuccess.value = false), 2000);
 };
 
-const inputClass = "w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg";
+const inputClass =
+  "w-full mb-2 px-3 py-2 border border-gray-300 rounded-lg text-sm sm:mb-4 sm:px-4 sm:py-3 sm:text-base";
+
 const buttonClass =
-  "bg-pink-500 hover:bg-pink-600 text-white w-full mt-4 py-3 rounded-lg transition";
+  "bg-pink-500 hover:bg-pink-600 text-white w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xs mt-2 py-2 rounded-lg transition text-sm sm:mt-4 sm:py-3 sm:text-base";
 </script>

@@ -10,11 +10,11 @@
   <div v-if="showError" :class="errorClass">Пожалуйста, заполните все поля</div>
 
   <div class="max-w-7xl mx-auto px-4 py-10 font-inter">
-    <h1 class="text-5xl font-bold mb-8">Оформление заказа</h1>
+    <h1 class="text-2xl sm:text-5xl font-bold mb-8">Оформление заказа</h1>
 
     <div class="grid md:grid-cols-2 gap-8 items-start">
       <div>
-        <h2 class="text-3xl font-bold mb-4">Авторизация</h2>
+        <h2 class="text-xl sm:text-3xl font-bold mb-4">Авторизация</h2>
         <button
           v-if="!isLoggedIn"
           @click="showAuthModal = true"
@@ -22,7 +22,10 @@
         >
           Войти или Зарегистрироваться
         </button>
-        <div v-else class="mb-4 text-lg font-semibold text-slate-500">
+        <div
+          v-else
+          class="mb-4 text-sm sm:text-xl font-semibold text-slate-500"
+        >
           Вошли как: {{ user.currentUser.email }}
         </div>
 
@@ -98,10 +101,11 @@ const totalSum = computed(() =>
   shop.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
 );
 
-const successClass =
-  "fixed top-6 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
-const errorClass =
-  "fixed top-6 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
+const baseClass =
+  "fixed top-6 left-1/2 transform -translate-x-1/2 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg shadow-lg z-50 text-sm sm:text-base max-w-[90%] sm:max-w-md text-center";
+
+const successClass = `bg-green-500 ${baseClass}`;
+const errorClass = `bg-red-500 ${baseClass}`;
 
 async function submitOrder() {
   console.log("Данные формы перед проверкой:", JSON.stringify(form));

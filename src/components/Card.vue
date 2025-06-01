@@ -31,7 +31,7 @@ function toggleCart() {
 
 <template>
   <div
-    class="group relative flex flex-col justify-between bg-white border border-slate-100 rounded-3xl p-6 cursor-pointer min-h-[400px]"
+    class="group relative flex flex-col justify-between bg-white border border-slate-100 rounded-3xl p-4 sm:p-6 cursor-pointer w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto"
   >
     <img
       :src="isFavorite ? '/like-pink.png' : '/heart.png'"
@@ -41,16 +41,20 @@ function toggleCart() {
     />
 
     <router-link :to="`/product/${id}`" class="flex flex-col items-center">
-      <img :src="item.image" alt="" class="max-h-[270px] object-contain" />
+      <img
+        :src="item.image"
+        alt=""
+        class="w-full max-h-[160px] sm:max-h-[200px] md:max-h-[250px] lg:max-h-[270px] object-contain"
+      />
       <p
-        class="mt-3 text-center text-lg font-medium min-h-[48px] leading-tight transition group-hover:text-pink-500"
+        class="mt-3 text-center text-sm sm:text-base lg:text-lg font-medium min-h-[48px] leading-tight transition group-hover:text-pink-500"
       >
         {{ item.name }}
       </p>
     </router-link>
 
     <div class="mt-4 flex justify-between items-center">
-      <b class="text-lg">{{ item.price }} тг.</b>
+      <b class="text-sm sm:text-base lg:text-lg">{{ item.price }} тг.</b>
       <button
         class="p-2 rounded-xl hover:bg-pink-300 transition"
         @click="toggleCart"
