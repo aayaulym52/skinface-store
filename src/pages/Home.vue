@@ -20,7 +20,7 @@ onMounted(() => {
   >
     {{ shop.notification }}
   </div>
-  <div class="mx-6 mt-6">
+  <div class="mx-6 mt-6 mb-4">
     <h2
       class="text-2xl font-bold sm:text-2xl md:text-3xl mb-4 sm:mb-6 lg:text-4xl"
     >

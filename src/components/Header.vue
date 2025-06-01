@@ -25,10 +25,6 @@ function handleUserClick() {
       >
         <h2 class="text-2xl font-bold text-primary relative z-30">Skinface</h2>
 
-        <button class="lg:hidden" @click="isOpen = !isOpen">
-          <img src="/menu.png" alt="Меню" class="w-6 h-6" />
-        </button>
-
         <ul class="hidden lg:flex items-center gap-14 cursor-pointer">
           <router-link to="/">
             <li class="text-lg text-slate-500 hover:text-black">Главная</li>
@@ -66,6 +62,18 @@ function handleUserClick() {
               class="w-6 h-6 sm:w-7 sm:h-7"
             />
           </router-link>
+
+          <button
+            class="lg:hidden"
+            @click="isOpen = !isOpen"
+            aria-label="Открыть меню"
+          >
+            <img
+              :src="isOpen ? '/close2.png' : '/menu.png'"
+              alt="Меню"
+              class="w-5 h-5 sm:w-7 sm:h-7"
+            />
+          </button>
         </div>
       </div>
 

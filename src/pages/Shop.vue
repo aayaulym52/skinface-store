@@ -121,7 +121,7 @@ const categories = [
 
           <select
             @change="onChangeSelect"
-            class="py-2 px-3 border rounded-md outline-none focus:border-pink-400"
+            class="py-2 px-3 border rounded-md outline-none bg-white focus:border-pink-400"
             :value="filters.sortBy"
           >
             <option value="title">По названию</option>

@@ -2,7 +2,9 @@
   <footer
     class="border-t border-gray-300 bg-[#4C6EF5] py-10 px-4 sm:px-10 lg:px-20"
   >
-    <div class="flex flex-wrap justify-between gap-y-8 items-start font-inter">
+    <div
+      class="flex flex-col lg:flex-row flex-wrap justify-between gap-y-8 items-start font-inter"
+    >
       <div class="flex-1 min-w-[150px]">
         <h5 class="text-white text-xl sm:text-2xl font-bold">Skinface</h5>
       </div>
