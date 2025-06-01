@@ -23,7 +23,11 @@ function handleUserClick() {
       <div
         class="max-w-[1680px] px-4 md:px-6 lg:px-8 mx-auto flex items-center justify-between"
       >
-        <h2 class="text-2xl font-bold text-primary relative z-30">Skinface</h2>
+        <router-link to="/"
+          ><h2 class="text-2xl font-bold text-primary relative z-30">
+            Skinface
+          </h2></router-link
+        >
 
         <ul class="hidden lg:flex items-center gap-14 cursor-pointer">
           <router-link to="/">
