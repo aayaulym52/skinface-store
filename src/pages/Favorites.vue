@@ -8,9 +8,7 @@
     </div>
 
     <div class="font-inter flex flex-col my-2 mx-4">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-        Избранное
-      </h1>
+      <h1 class="text-2xl sm:text-4xl font-bold mb-4 sm:mb-6">Избранное</h1>
 
       <CardList
         :items="favoriteItems"

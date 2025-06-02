@@ -2,13 +2,18 @@
   <div>
     <AuthModal v-if="!isLoggedIn && showAuthModal" @close="handleClose" />
 
-    <div v-else-if="isLoggedIn" class="px-4 py-6 sm:p-10 max-w-md mx-auto font-inter">
-      <p class="mb-6 sm:mb-10 text-lg sm:text-xl text-center">
-        Привет, <strong>{{ currentUser.fullName }}</strong>!
-      </p>
+    <div
+      v-else-if="isLoggedIn"
+      class="px-4 py-6 sm:p-10 max-w-md mx-auto font-inter"
+    >
+      <div class="flex items-center justify-center gap-2 mb-6 sm:mb-10">
+        <img src="/user.png" alt="" class="w-6 h-6" />
+        <p class="text-md sm:text-lg font-semibold text-slate-500">
+          {{ currentUser.email }}
+        </p>
+      </div>
 
       <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
-
         <ProfileTabs
           v-if="!selectedTab"
           class="text-lg sm:text-base"
@@ -18,12 +23,12 @@
         />
 
         <section v-else class="mt-2">
-          <button
-            @click="selectedTab = null"
-            class="mb-4"
-          >
-            <img src="/arrow.png" alt="" class="w-4 h-4 opacity-70 hover:opacity-100" />
-            
+          <button @click="selectedTab = null" class="mb-4">
+            <img
+              src="/arrow.png"
+              alt=""
+              class="w-4 h-4 opacity-70 hover:opacity-100"
+            />
           </button>
 
           <OrdersList v-if="selectedTab === 'orders'" :orders="orders" />
@@ -45,7 +50,6 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, reactive, computed, onMounted } from "vue";
 import AuthModal from "../components/AuthModal.vue";
@@ -62,7 +66,7 @@ const currentUser = computed(
 );
 const isLoggedIn = ref(false);
 const showAuthModal = ref(true);
-const selectedTab = ref(null); 
+const selectedTab = ref(null);
 const orders = ref([]);
 
 const address = ref({

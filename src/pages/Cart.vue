@@ -8,18 +8,18 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 font-inter mt-4">
-      <h1 class="text-3xl sm:text-5xl font-bold mb-8">Корзина</h1>
+      <h1 class="text-2xl sm:text-5xl font-bold mb-8">Корзина</h1>
 
       <div v-if="shop.cartItems.length === 0" class="text-center mt-20">
-        <h2 class="text-2xl sm:text-3xl font-semibold mb-4">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4">
           Товаров в корзине нет
         </h2>
-        <p class="text-gray-600 mb-6">
+        <p class="text-gray-600 mb-6 text-md sm:text-lg">
           Добавьте товары в корзину для оформления заказа.
         </p>
         <router-link to="/shop">
           <button
-            class="bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700 transition text-base"
+            class="bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700 transition text-sm sm:text-base"
           >
             К покупкам
           </button>
