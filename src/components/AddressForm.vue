@@ -63,5 +63,5 @@ const inputClass =
   "w-full mb-2 px-3 py-2 border border-gray-300 rounded-lg text-sm sm:mb-4 sm:px-4 sm:py-3 sm:text-base";
 
 const buttonClass =
-  "bg-pink-500 hover:bg-pink-600 text-white w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xs mt-2 py-2 rounded-lg transition text-sm sm:mt-4 sm:py-3 sm:text-base";
+  "w-full bg-pink-500 hover:bg-pink-600 text-white mt-2 py-2 rounded-lg transition text-sm sm:mt-4 sm:py-3 sm:text-base";
 </script>
