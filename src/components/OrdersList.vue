@@ -14,7 +14,7 @@
         <div
           class="flex flex-col sm:flex-row sm:justify-between mb-2 sm:items-center gap-1 sm:gap-0"
         >
-          <span class="font-semibold text-xs sm:text-base"
+          <span class="font-semibold text-sm sm:text-base"
             >Заказ №{{ order.id }}</span
           >
           <span class="text-gray-600 text-xs sm:text-sm">
@@ -26,12 +26,12 @@
           <li
             v-for="item in order.items"
             :key="item.id"
-            class="flex items-center gap-3 text-xs sm:text-base"
+            class="flex items-center gap-3 text-sm sm:text-base"
           >
             <img
               :src="item.image"
               alt="Товар"
-              class="w-8 h-8 sm:w-12 sm:h-12 object-cover rounded"
+              class="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded"
             />
             <span class="flex-1">
               {{ item.name }} — {{ item.quantity }} шт.
@@ -39,7 +39,7 @@
           </li>
         </ul>
 
-        <div class="font-bold text-pink-600 text-xs sm:text-base">
+        <div class="font-bold text-pink-600 text-sm sm:text-base">
           Итого: {{ order.total }} ₸
         </div>
       </div>

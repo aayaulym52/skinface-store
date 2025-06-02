@@ -2,31 +2,37 @@
   <div>
     <AuthModal v-if="!isLoggedIn && showAuthModal" @close="handleClose" />
 
-    <div v-else-if="isLoggedIn" class="p-10 max-w-5xl mx-auto font-inter">
-      <p class="mb-10 text-xl">
-        Привет, <strong>{{ currentUser.fullName }}</strong
-        >!
+    <div v-else-if="isLoggedIn" class="px-4 py-6 sm:p-10 max-w-md mx-auto font-inter">
+      <p class="mb-6 sm:mb-10 text-lg sm:text-xl text-center">
+        Привет, <strong>{{ currentUser.fullName }}</strong>!
       </p>
 
-      <div class="flex gap-10">
-        <!-- Левое меню -->
+      <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+
         <ProfileTabs
+          v-if="!selectedTab"
+          class="text-lg sm:text-base"
           :selectedTab="selectedTab"
           @update:selectedTab="selectedTab = $event"
           @logout="logout"
         />
 
-        <!-- Правая часть -->
-        <section class="flex-1">
-          <OrdersList v-if="selectedTab === 'orders'" :orders="orders" />
+        <section v-else class="mt-2">
+          <button
+            @click="selectedTab = null"
+            class="mb-4"
+          >
+            <img src="/arrow.png" alt="" class="w-4 h-4 opacity-70 hover:opacity-100" />
+            
+          </button>
 
+          <OrdersList v-if="selectedTab === 'orders'" :orders="orders" />
           <AddressForm
             v-if="selectedTab === 'address'"
             v-model:form="address"
             @save="handleSaveAddress"
             :showButton="true"
           />
-
           <ContactForm
             v-if="selectedTab === 'contacts'"
             v-model="editedUser"
@@ -38,6 +44,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref, reactive, computed, onMounted } from "vue";
@@ -55,7 +62,7 @@ const currentUser = computed(
 );
 const isLoggedIn = ref(false);
 const showAuthModal = ref(true);
-const selectedTab = ref("orders");
+const selectedTab = ref(null); 
 const orders = ref([]);
 
 const address = ref({
@@ -81,10 +88,6 @@ function logout() {
   userStore.currentUser = null;
   isLoggedIn.value = false;
   showAuthModal.value = true;
-}
-
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString();
 }
 
 async function handleSaveAddress() {
