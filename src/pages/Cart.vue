@@ -8,7 +8,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 font-inter mt-4">
-      <h1 class="text-2xl sm:text-5xl font-bold mb-8">Корзина</h1>
+      <h1 class="text-2xl sm:text-4xl font-bold mb-8">Корзина</h1>
 
       <div v-if="shop.cartItems.length === 0" class="text-center mt-20">
         <h2 class="text-xl sm:text-2xl font-semibold mb-4">

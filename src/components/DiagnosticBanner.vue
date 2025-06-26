@@ -33,6 +33,7 @@
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           }"
+          :loop="true"
           ref="mySwiper"
         >
           <swiper-slide v-for="(slide, index) in slides" :key="index">
