@@ -51,7 +51,7 @@
 
     <button
       type="button"
-      class="absolute left-1/2 -translate-x-1/2 bg-blue-500 text-white font-medium rounded-full shadow-md hover:bg-blue-600 transition duration-300 text-center bottom-2 sm:bottom-6 md:bottom-6 text-xs px-4 py-1.5 sm:text-sm sm:px-6 sm:py-2 md:text-lg md:px-8 md:py-4"
+      class="absolute left-1/2 -translate-x-1/2 bg-blue-500 text-white font-medium rounded-full shadow-md hover:bg-blue-600 transition duration-300 text-center bottom-3 sm:bottom-6 md:bottom-6 text-xs px-4 py-1.5 sm:text-sm sm:px-6 sm:py-2 md:text-lg md:px-8 md:py-4"
     >
       ЗАПИСАТЬСЯ НА ДИАГНОСТИКУ
     </button>
@@ -121,9 +121,4 @@ const arrowIcon = (direction) => `
   }
 }
 
-@media (min-width: 1024px) {
-  .swiper-slide {
-    height: 420px;
-  }
-}
 </style>

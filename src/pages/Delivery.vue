@@ -25,7 +25,7 @@
         <button
           class="w-fit md:min-w-[250px] h-10 md:h-14 mt-4 text-white bg-[#4C6EF5] rounded-full hover:bg-blue-400 transition text-sm md:text-base px-6"
         >
-          Связать с консультантами
+          Связаться с консультантами
         </button>
       </div>
 

@@ -20,7 +20,7 @@ onMounted(() => {
   >
     {{ shop.notification }}
   </div>
-  <div class="mx-6 mt-6 mb-4">
+  <div class="mt-6 mb-6 max-w-full md:max-w-7xl mx-auto px-4">
     <h2
       class="text-2xl font-bold sm:text-2xl md:text-3xl mb-4 sm:mb-6 lg:text-4xl"
     >
@@ -29,8 +29,9 @@ onMounted(() => {
 
     <CardList
       :items="shop.items"
-      columns="grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
+      columns="grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     />
   </div>
+
   <DiagnosticBanner />
 </template>

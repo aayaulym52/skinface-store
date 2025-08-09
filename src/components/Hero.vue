@@ -4,7 +4,7 @@
   <div class="w-full font-inter">
     <div class="h-full">
       <header
-        class="relative w-full min-h-[40vh] sm:min-h-[65vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden mt-4 lg:mt-8"
+        class="relative w-full min-h-[40vh] sm:min-h-[65vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden"
       >
         <img
           src="/bg.jpg"
